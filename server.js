@@ -150,14 +150,14 @@ app.post('/api/optimize',async(req,res)=>{
 
     p.on('close',code=>{
       if(code===0&&fs.existsSync(out)){
-        jobs.get(id)={
+        jobs.set(id,{
           status:'done',
           progress:100,
           output:`/outputs/${id}.mp4`
         };
         fs.unlink(input,()=>{});
       }else{
-        jobs.get(id)={
+        jobs.set(id,{
           status:'error',
           progress:0,
           error:err.slice(-1500)||'FFmpeg failed'
@@ -167,7 +167,7 @@ app.post('/api/optimize',async(req,res)=>{
     });
 
   }catch(e){
-    jobs.get(id)={
+    jobs.set(id,{
       status:'error',
       progress:0,
       error:e.message
