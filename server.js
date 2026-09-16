@@ -154,14 +154,14 @@ app.post('/api/optimize',async(req,res)=>{
           status:'done',
           progress:100,
           output:`/outputs/${id}.mp4`
-        };
+        });
         fs.unlink(input,()=>{});
       }else{
         jobs.set(id,{
           status:'error',
           progress:0,
           error:err.slice(-1500)||'FFmpeg failed'
-        };
+        });
         fs.unlink(out,()=>{});
       }
     });
@@ -171,7 +171,7 @@ app.post('/api/optimize',async(req,res)=>{
       status:'error',
       progress:0,
       error:e.message
-    };
+    });
   }
 
   res.json({jobId:id});
