@@ -179,8 +179,7 @@ app.post('/api/optimize',async(req,res)=>{
 
 app.get('/api/jobs/:id',(req,res)=>{
   let j=jobs.get(req.params.id);
-  if(!j)
-    return res.status(404).json({error:'Job not found'});
+  if(!j)return res.status(404).json({error:'Job not found'});
   res.json(j);
 });
 
